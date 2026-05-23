@@ -86,3 +86,19 @@ void add_password(Vault *v){
     printf("\n");
     add_credential(v, service, password);
 }
+
+void get_vault_path(char* filepath, size_t max_len){
+    const char* home_dir =NULL;
+    #ifdef _WIN32
+        home_dir = getenv("USERPROFILE");
+    #else
+        home_dir = getenv("HOME");
+    #endif
+    if(home_dir!=NULL){
+        snprintf(filepath, max_len, "%s/.vault.bin",home_dir);
+
+    }
+    else{
+        strcpy(filepath,"vault.bin");
+    }
+}

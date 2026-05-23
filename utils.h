@@ -29,5 +29,6 @@ bool load_vault(Vault* v, const char* filename);
 void generate_random_key(char* buffer, size_t length);
 void list_passwords(Vault* v);
 void add_password(Vault* v);
+void get_vault_path(char* filepath, size_t max_len);
 
 #endif

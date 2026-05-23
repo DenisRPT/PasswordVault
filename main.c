@@ -7,7 +7,9 @@
 int main(){
     srand(time(NULL));
     Vault vault = {NULL,0,0};
-    if(load_vault(&vault,"vault.bin")){
+    char filepath[512];
+    get_vault_path(filepath, sizeof(filepath));
+    if(load_vault(&vault,filepath)){
         printf("Succesfully loaded the vault\n");
     }
     else{
@@ -36,7 +38,7 @@ int main(){
         }
     }
     if(new_pas) {
-        save_vault(&vault,"vault.bin");
+        save_vault(&vault,filepath);
     }
     free(vault.entries);
     
