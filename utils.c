@@ -1,7 +1,5 @@
 #include "utils.h"
-#include <iso646.h>
-#include <stddef.h>
-#include <stdio.h>
+
 
 
 void generate_random_key(char* buffer, size_t length){
@@ -85,6 +83,40 @@ void add_password(Vault *v){
     scanf("%s",password);
     printf("\n");
     add_credential(v, service, password);
+}
+
+void rm_password(Vault*v){
+    list_passwords(v);
+    printf("Select password ID to remove: ");
+    int choice;
+    while(1){
+        scanf("%d",&choice);
+        while ((getchar()) != '\n');
+        if(choice>=1 && choice <=v->count){
+            break;
+        }
+        printf("Invalid choice\n");
+    }
+    if(choice==v->count){
+        v->count--;
+    }
+    else {
+        for(int i=choice-1;i<v->count-1;i++){
+            v->entries[i] = v->entries[i+1];
+        }
+        v->count--;
+    }
+    printf("Password succesfully removed\n");
+    if(v->capacity==0){
+        free(v->entries);
+        v->entries = NULL;
+        v->capacity = 0;
+        return;
+    }
+    v->capacity = v->count;
+    Credential* temp = realloc(v->entries,sizeof(Credential)*v->capacity);
+    if(temp==NULL) return;
+    v->entries = temp;
 }
 
 void get_vault_path(char* filepath, size_t max_len){

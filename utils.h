@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <time.h>
 #include <stdbool.h>
+#include <assert.h>
 
 #define KEY_SIZE 16
 
@@ -29,6 +30,7 @@ bool load_vault(Vault* v, const char* filename);
 void generate_random_key(char* buffer, size_t length);
 void list_passwords(Vault* v);
 void add_password(Vault* v);
+void rm_password(Vault* v);
 void get_vault_path(char* filepath, size_t max_len);
 
 #endif

@@ -18,9 +18,10 @@ int main(){
     bool new_pas = false;
     bool running = true;
     while(running){
-        printf(" 1.List Passwords\n 2.Add Password\n 3.Exit\n");
+        printf(" 1.List Passwords\n 2.Add Password\n 3.Remove Password\n 4.Exit\n");
         int choice;
         scanf("%d",&choice);
+        while ((getchar()) != '\n');
         switch (choice) {
             case(1):
             list_passwords(&vault);
@@ -29,7 +30,11 @@ int main(){
             add_password(&vault);
             new_pas = true;
             break;
-            case(3) :
+            case(3):
+            rm_password(&vault);
+            new_pas = true;
+            break;
+            case(4) :
             running = false;
             break;
             default :
